@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<title id="indexTitle">Contacts | The Golden Circle</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Nunito" rel='stylesheet'>
+<script type="text/javascript" src="js/code.js"></script>
+</head>
+<body onload="getContacts();">
+<main class="center">
+	<div class="brand">
+		<h1> THE GOLDEN CIRCLE </h1>
+		<img src = "./images/logo.png" alt ="logo" class = "brand-mark" aria-hidden="true">
+	</div>
+
+	<div id="boxBody">
+		<table id="contactTable">
+		<tr>
+		<th id="tableMasterHeader">Contacts</th>
+		</tr>
+		<tr>
+		<th id = "tableSubHeader">First Name</th>
+		<th id = "tableSubHeader">Last Name</th>
+		<th id = "tableSubHeader">Email</th>
+		<th id = "tableSubHeader">Phone</th>
+		<th id = "tableSubHeader">Options</th>
+		</tr>
+		<tbody id="tableBody">
+
+		</tbody>
+		</table>
+		<div id="search">
+		<input type="text" id="searchQuery" placeholder="Search Contacts"></input>
+			<td class = "options">
+				<div class = "actions">
+					<button class="buttons" onclick="getContacts();">Search</button>
+				</div>
+			</td>
+		</div>
+		
+		<div id="addMenu">
+			<input type="text" id="addF" placeholder="First Name"></input><br>
+			<input type="text" id="addL" placeholder="Last Name"></input><br>
+			<input type="text" id="addE" placeholder="Email"></input><br>
+			<input type="text" id="addP" placeholder="Phone Number"></input><br><br>
+			<td class = "options">
+				<div class = "actions">
+					<button class="buttons" onclick="addContact();">Add</button>
+				</div>
+			</td>
+			</div>
+		<div id="editMenu">
+			<input type="text" id="contactsF" placeholder="First Name"></input><br>
+			<input type="text" id="contactsL" placeholder="Last Name"></input><br>
+			<input type="text" id="contactsE" placeholder="Email"></input><br>
+			<input type="text" id="contactsP" placeholder="Phone Number"></input><br><br>
+			<td class = "options">
+				<div class = "actions">
+					<button class="buttons" onclick="confirmEdit();">Save</button>
+					<button class="buttons" onclick="cancelFunc();">Cancel</button>
+				</div>
+			</td>
+		</div>
+		<div id="deletePrompt">
+		<p>Are you sure you want to delete this contact?</p>
+		<div id="deleteSelect"></div><br>
+			<td class = "options">
+				<div class = "actions">
+					<button class="buttons" onclick="confirmDelete();">Delete</button>
+					<button class="buttons" onclick="cancelFunc();">Cancel</button>
+				</div>
+			</td>
+		</div>
+		<div id="contactsResult">
+		</div>	
+		<td class = "options">
+			<div class = "actions">
+				<button class="buttons" onclick="doLogout();">Log Out</button>
+			</div>
+		</td>
+	
+</div>
+</main>
+
+
+</body>
+</html>

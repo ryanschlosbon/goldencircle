@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<title id="indexTitle">Welcome | The Golden Circle</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Nunito" rel='stylesheet'>
+<script type="text/javascript" src="js/code.js" defer></script>
+</head>
+<body>
+<main class = "center">
+	<div class="brand">
+		<h1> THE GOLDEN CIRCLE </h1>
+		<img src = "./images/logo.png" alt ="logo" class = "brand-mark" aria-hidden="true">
+	</div>
+
+	<div id="boxBody">
+	<div id="loginDiv">
+    	<span id="inner-title" class = "inner-title">Enter Credentials</span>
+    	<br>
+    	<input type="text" id="loginName" placeholder="Username" /><br />
+    	<input type="password" id="loginPassword" placeholder="Password"/><br /><br>
+    	<button type="button" id="loginButton" class="buttons" onclick="doLogin();">Log In</button>
+		<button type="button" id="switchButton" class="buttons" onclick="switchMode();">Sign Up</button>
+		<br>
+    	<span id="loginResult"></span>
+	</div>
+	<div id="signupDiv">
+		<span id="inner-title" class = "inner-title">Enter User Info</span>
+		<br>
+		<input type="text" id="fName" placeholder="First Name" /><br />
+		<input type="text" id="lName" placeholder="Last Name" /><br />
+		<input type="text" id="signUpLoginName" placeholder="Username" /><br />
+		<input type="password" id="signUpLoginPassword" placeholder="Password" /><br /><br>
+		<button type="button" id="registerButton" class="buttons" onclick="doRegister();">Register</button>
+		<button type="button" id="switchButton" class="buttons" onclick="switchMode();">Go Back</button>
+		<span id="registerResult"></span>
+	</div>
+	</div>
+</main>
+</body>
+</html>

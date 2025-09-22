@@ -1,0 +1,255 @@
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+:root{
+  --top-gap: clamp(24px, 7vh, 120px);   /* breathing room at top */
+  --skyline-gap: 24vh;                  /* bottom space for skyline */
+}
+
+body {
+  margin: 8px;              /* kill the default 8px */
+  min-height: 100svh;     /* better on mobile than 100vh */
+  /* overflow-x: hidden; */     /* avoid accidental horizontal scroll */
+  /* overflow-y: hidden; */
+  display: grid;
+  grid-template-rows: var(--top-gap) 1fr var(--skyline-gap);
+  padding: 0 1rem 0;                      /* skyline space handled by the 24vh row */
+  background-image: url("../images/background.svg");
+  background-size: 100% auto;   /* Stretch full width, keep height auto */
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-attachment: fixed;
+  text-align: center;
+}
+
+/* the wrapper that holds title + box */
+.center{
+  grid-row: 2;
+  /* grid inside so #boxBody can take the remaining height and scroll */
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 4rem);
+  justify-items: center;
+  align-content: start;
+  max-height: 100%;                       /* <= key */
+  width: 100%;
+}
+
+.inner-title{
+    color: rgb(167,108,30);
+    font-size: clamp(14px, 1.1vw, 18px);
+    font-family :'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+/* the group that holds logo + title */
+.brand{
+  /* single knob for logo size */
+  --logoW: clamp(220px, 22vw, 520px);
+  --logoRatio: 486/552;
+  --logoH: calc(var(--logoW) * var(--logoRatio));
+
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  /* room inside the brand for the wreath above/below the text */
+  margin-top: 2%;
+  padding-top:    calc(var(--logoH) * 0.12);  /* was 0.18; less now that we have a top gap */
+  padding-bottom: calc(var(--logoH) * 0.12);
+}
+
+/* the title */
+.brand h1{
+  position: relative;
+  z-index: 1;              /* above the logo */
+  margin: 0;
+  color: rgb(167,108,30);
+  font-weight: 700;
+  line-height: 1.05;
+  font-size: clamp(48px, 6.8vw, 140px); /* responsive size */
+}
+
+/* logo centered behind the title */
+.brand-mark{
+  position: absolute;
+  top: 50%; left: 50%;
+  width: var(--logoW); height: var(--logoH);
+  transform: translate(-50%, -58%);   /* tweak -54%..-60% to taste */
+  pointer-events: none;
+  z-index: 0;
+}
+
+h1
+{
+    margin: 0 0 1.25rem;
+    color: rgb(167,108,30);
+    font-size: clamp(40px, 8vw, 140px);
+    font-weight: 700;
+    line-height: 1.05;
+    font-family: 'Biryani';
+}
+
+/* center the login box */
+#boxBody{
+  margin-top: 1%;
+  /* your width/padding/border … keep what you had */
+  width: clamp(480px, 70vw, 1200px);  padding: 40px 48px;
+  border: 2px solid rgb(167,108,30);
+  border-radius: 8px;
+  background: #fff;
+  font-size: clamp(12px, 1.2vw, 18px);  /* base text inside box scales */
+  font-family: "Nunito", sans-serif;
+  overflow:auto;
+
+  /* IMPORTANT: allow the card’s inner content to scroll, not the page */
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr); /* header then scroll area */
+  row-gap: 1rem;           /* <— controls spacing between table, search, forms */
+}
+
+/* Put table+forms in a scrollable area */
+#boxBody .content{
+  /* wrap the table + search + form in a div.content */
+  min-height: 0;                           /* allows minmax(0,1fr) to shrink */
+  overflow: auto;                          /* <— card gets its own scrollbar */
+}
+
+/* Search row: input grows, button right next to it */
+#search{
+  display: grid;
+  grid-template-columns: minmax(10rem, 20rem) auto; /* tweak to taste */
+  gap: .5rem;                 /* distance between input and button */
+  justify-content: center;    /* center the pair in the card */
+  align-items: center;
+}
+
+#search input{
+  width: 100%;                /* fill the first column */
+}
+
+/* Inputs & buttons scale too */
+#boxBody input{
+  width: clamp(220px, 40%, 360px);
+  font-size: clamp(14px, 1.1vw, 18px);
+  padding: clamp(6px, .6vw, 10px);
+}
+
+.buttons {
+    background-color: rgb(167,108,30);
+    border: rgb(167,108,30);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(14px, 1.1vw, 18px);
+    padding: clamp(10px, .9vw, 14px) clamp(16px, 1.2vw, 22px);
+}
+
+#loginDiv {
+	display: block;
+	transition-property: display;
+	transition-duration: 0.8s;
+	transition-timing-function: linear;
+	transition-delay: 1s;
+}
+
+.buttons:hover {
+  background-color: rgb(206, 159, 64);
+  border: rgb(167,108,30);
+  color: rgb(255, 255, 255);
+  /*padding: 15px 32px;*/
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /*font-size: 16px;*/
+}
+#signupDiv {
+  display: none;
+	transition: display 0.8s;
+}
+
+/* Make the table stable and let content wrap */
+#contactTable{ width:100%; border-collapse:collapse; table-layout:fixed; }
+
+#contactTable th, #contactTable td{
+  padding:.5rem .6rem;
+  vertical-align: middle;
+  white-space: normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+#contactTable th:last-child,
+#contactTable td:last-child{
+  width: clamp(10rem, 20vw, 14rem);   /* scales with viewport */
+  min-width: 0;                       /* let it shrink */
+  padding: .5rem;                     /* equal gap to cell borders */
+}
+
+#contactTable td:last-child{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));  /* horizontal by default */
+  gap: .5rem;                                        /* equal gap between buttons */
+  width: 100%;
+  height: 100%;                                      /* fill cell height */
+  align-content: center;                             /* vertical centering in tall rows */
+  justify-items: stretch;
+}
+
+#contactTable td:last-child .buttons,
+#contactTable td:last-child button,
+#contactTable td:last-child input[type="button"],
+#contactTable td:last-child input[type="submit"]{
+  width: 100%;
+  min-width: 0;                 /* allow shrinking */
+  white-space: nowrap;          /* keep “Edit”/“Delete” on one line */
+  padding: .5rem .75rem;        /* consistent, not too chunky */
+}
+
+/* stack vertically only when the window is narrow */
+@media (max-width: 640px){
+  #contactTable td:last-child{ grid-template-columns: 1fr; }
+}
+
+
+td.options { width: 8rem; min-width: 8rem; }
+td.options .actions { display: grid; gap: 0.4rem; }
+td.options .actions button { width: 100%; }
+
+#tableSubHeader{
+  background-color: rgb(80, 41, 11);
+	text-align: center;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;   /* centers the table horizontally */
+  /* margin: 0 auto;     // shorthand equivalent */
+  float: none;          /* just in case */
+  /* optional: if it’s set to 100% width somewhere, remove it or: */
+  /* width: auto; max-width: 100%; */
+}
+
+#editMenu {
+	display: none !important;
+	transition: display 0.8s;
+}
+#editMenu.show {
+	display: block !important;
+}
+#deletePrompt {
+	display: none;
+	transition: display 0.8s;
+}
+#deletePrompt.show {
+	display: block !important;
+}
+#addMenu {
+	display: block !important;
+}
+#addMenu.hide {
+	display: none !important;
+}
+
+/* optional: stop last-child margin escape anywhere */
+main > *:last-child { margin-bottom: 0; }
