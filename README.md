@@ -1,4 +1,4 @@
-![alt text](https://github.com/ryanschlosbon/goldencircle/documentation/header.png "Header Image")
+![alt text](https://github.com/ryanschlosbon/goldencircle/blob/29c6f31bad2f6c7e46dc93e07a19d7fef31e7470/documentation/header.png "Header Image")
 # Creators:
 
 - Ryan Schlosbon
