@@ -6,7 +6,7 @@
 - Wyat Fogel
   * Front End (HTML, CSS, JS)
 - Gabriel Alves
-  * Database, API, Front End (HTML)
+  * Database, API, Front End (HTML, JS)
 - Ivan Miskevich
   * API
 # Overview
