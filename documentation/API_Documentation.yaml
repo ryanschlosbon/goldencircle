@@ -1,0 +1,277 @@
+swagger: "2.0"
+info:
+  description: This is the API documentation for a simple Contact Manager supporting CRUD operations.
+  version: 1.0.0
+  title: (Contact Manager Name) API
+  # put the contact info for your development or API team
+  contact:
+    email: galves3532@gmail.com 
+  x-additionContacts:
+    email: imiskevich03@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: thegoldencircle.online
+basePath: /LAMPAPI
+schemes:
+  - http
+  
+paths:
+  /Login.php:
+    post:
+      tags:
+        - user
+      operationId: "userLogin"
+      summary: "Authenticates a user and creates a session."
+      description: "This endpoint accepts a user's credentials (username and password) in a JSON request body. If the credentials are valid, it returns the user's ID, first name, and last name. Upon successful authentication, a cookie is created on the server to manage the user's session. Else and error indicating no success is returned"
+      consumes:
+        - application/json
+      produces:
+        - application/json 
+      parameters:
+        - in: body
+          required: true
+          name: "loginCredential"
+          description: "User credentials for login"
+          schema: 
+            $ref: '#/definitions/Login'
+      responses:
+        '200':
+          description: "Login Successful"
+        '404':
+          description: "URL Not Found"
+        '500':
+          description: "Server Error"
+
+  /SignUp.php:
+    post:
+      tags:
+        - user
+      operationId: "createUserLogin"
+      summary: "Creates a new user account."
+      description: "This endpoint accepts a user's information (username, password, first name, last name) to create a new user account in the system. Upon successful creation, it returns a success message ( User Created! ) or an error indicating no success."
+      consumes:
+        - application/json
+      produces:
+        - application/json 
+      parameters:
+        - in: body
+          required: true
+          name: "newUserCredential"
+          description: "New user credentials for login"
+          schema: 
+            $ref: '#/definitions/SignUp'
+      responses:
+        '200':
+          description: "Sign up successful, user was added"
+        '404':
+          description: "URL Not Found"
+        '500':
+          description: "Server Error"
+    
+  /AddContact.php:
+    post:
+      tags:
+        - contact
+      operationId: "addContact"
+      summary: "Adds a new contact to a user's list."
+      description: "Adds a new contact record associated with a specific user. It requires contact details (first name, last name, email, phone number) and a valid user session for authentication. A successful request returns an error indicating success or not."
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          required: true
+          name: "addContact"
+          description: "Add a contact to the user"
+          schema: 
+            $ref: '#/definitions/Add'
+      responses:
+        '200':
+          description: "Contact was added"
+        '404':
+          description: "URL Not Found"
+        '500':
+          description: "Server Error"
+    
+  /SearchContacts.php:
+    post:
+      tags:
+        - contact
+      operationId: "searchContact"
+      summary: "Searches for contacts based on a query."
+      description: "Retrieves a list of contacts that are linked to a specific user, filtered by name and returns a list of contacts that match the filter."
+      consumes:
+        - application/json
+      produces:
+        - application/json 
+      parameters:
+        - in: body
+          required: true
+          name: "searchContact"
+          description: "Searches for a contact in all contact fields"
+          schema: 
+            $ref: '#/definitions/Search'
+      responses:
+        '200':
+          description: "Search Successful"
+        '404':
+          description: "URL Not Found"
+        '500':
+          description: "Server Error"
+    
+  /EditContact.php:
+    post:
+      tags:
+        - contact
+      operationId: "editContact"
+      summary: "Replaces an existing contact's record."
+      description: "Performs a full update on a contact. It requires the complete contact record, including all fields, to replace the existing one in the database. "
+      consumes:
+        - application/json
+      produces:
+        - application/json 
+      parameters:
+        - in: body
+          required: true
+          name: "editContact"
+          description: "Edit the fields for a given contact"
+          schema: 
+            $ref: '#/definitions/Edit'
+      responses:
+        '200':
+          description: "Contact was edited"
+        '404':
+          description: "URL Not Found"
+        '500':
+          description: "Server Error"
+    
+    
+  /DeleteContact.php:
+    post:
+      tags:
+        - contact
+      operationId: "deleteContact"
+      summary: "Deletes a contact from a user's list."
+      description: "Removes a contact record from a user's account. It requires the contact's unique ID to identify which record to delete. Returns a JSON indicating success or not"
+      produces:
+        - application/json 
+      parameters:
+      - in: body
+        required: true
+        name: "deleteContact"
+        description: "Delete a given contact from the contact list"
+        schema: 
+          $ref: '#/definitions/Delete'
+      responses:
+        '200':
+          description: "Contact Deleted Successfully"
+        '404':
+          description: "URL Not Found"
+        '500':
+          description: "Server Error"
+          
+          
+definitions:
+  Login:
+    type: object
+    required:
+      - login
+      - password
+    properties:
+      login:
+        type: string
+        example: ""
+      password:
+        type: string
+        example: ""
+  SignUp:
+    type: object
+    required:
+      - login
+      - password
+      - firstName
+      - lastName
+    properties:
+      login:
+        type: string
+        example: ""
+      password:
+        type: string
+        example: ""
+      firstName:
+        type: string
+        example: ""
+      lastName:
+        type: string
+        example: ""
+  Add:
+    type: object
+    required:
+      - userID
+      - first
+      - last
+      - email
+      - phone
+    properties:
+      userID:
+        type: string 
+        example: ""
+      first:
+        type: string
+        example: ""
+      last:
+        type: string
+        example: ""
+      email:
+        type: string
+        example: ""
+      phone:
+        type: string
+        example: ""
+  Edit: 
+    type: object
+    required:
+      - first
+      - last
+      - email
+      - phone
+      - id
+    properties:
+      first:
+        type: string
+        example: ""
+      last:
+        type: string
+        example: ""
+      email:
+        type: string
+        example: ""
+      phone:
+        type: string
+        example: ""
+      id:
+        type: string
+        example: ""
+  Search: 
+    type: object
+    required:
+      - userID
+      - search
+    properties:
+      userID:
+        type: string
+        example: ""
+      search: 
+        type: string
+        example: ""
+  Delete: 
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        example: ""
